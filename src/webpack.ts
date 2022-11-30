@@ -27,10 +27,13 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
 interface Package {
     webpack?: {
+        mode?: 'production' | 'development' | 'none';
         entry?: {
             [key: string]: string;
         },
+        path?: string;
         filename?: string;
+        type?: string;
     }
 }
 
@@ -54,15 +57,15 @@ interface Package {
         Logger.warn('Using Legacy Config: %s', webpackConfig);
     }
 
-    const config: Configuration = legacyConfig || {
-        mode: 'production',
+    const defaultConfig: Configuration = {
+        mode: pkg.webpack?.mode || 'production',
         devtool: 'source-map',
         entry: {},
         output: {
-            path: resolve(cwd, 'dist'),
+            path: resolve(cwd, pkg.webpack?.path || 'dist'),
             filename: pkg.webpack?.filename || '[name].bundle.js',
             library: {
-                type: 'umd'
+                type: pkg.webpack?.type || 'umd'
             }
         },
         optimization: {
@@ -94,6 +97,8 @@ interface Package {
         },
         target: 'web'
     };
+
+    const config: Configuration = legacyConfig || defaultConfig;
 
     if (!legacyConfig && pkgRequired('jquery')) {
         const jquery = pkgResolve('jquery');
