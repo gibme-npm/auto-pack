@@ -138,6 +138,15 @@ interface Package {
 
             config.entry[entry] = resolve(cwd, entries[entry]);
         }
+
+        let last = 0;
+        config.plugins?.push(new webpack.ProgressPlugin((percentage, msg, ...args) => {
+            const pct = parseInt((percentage * 100).toFixed(0));
+            if (pct !== last) {
+                Logger.info('%s% complete: %s %s', pct, msg, args.join(' '));
+                last = pct;
+            }
+        }));
     } else {
         config.plugins?.push(new NodePolyfillPlugin());
     }
