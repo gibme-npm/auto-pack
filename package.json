@@ -1,6 +1,6 @@
 {
   "name": "@gibme/auto-pack",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Webpack with a twist",
   "bin": {
     "auto-pack": "cli.js"
@@ -39,18 +39,17 @@
   },
   "dependencies": {
     "@gibme/logger": "^1.0.2",
-    "css-loader": "^6.7.2",
-    "expose-loader": "^4.0.0",
+    "css-loader": "^6.7.3",
+    "expose-loader": "^4.1.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
-    "style-loader": "^3.3.1",
-    "ts-loader": "^9.4.1",
-    "webpack": "^5.75.0"
+    "style-loader": "^3.3.2",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.77.0"
   },
   "devDependencies": {
-    "@types/command-line-args": "^5.2.0",
     "@types/mocha": "^10.0.0",
-    "@types/node": "^18.11.9",
-    "@types/webpack": "^5.28.0",
+    "@types/node": "^18.15.11",
+    "@types/webpack": "^5.28.1",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
     "eslint": "^8.26.0",
@@ -61,7 +60,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "mocha": "^10.1.0",
     "ts-node": "^10.9.1",
-    "typedoc": "^0.23.21",
-    "typescript": "^4.8.4"
+    "typedoc": "^0.23.28",
+    "typescript": "^5.0.3"
   }
 }
