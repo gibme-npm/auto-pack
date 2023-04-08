@@ -3,7 +3,7 @@
   "excludeExternals": true,
   "excludePrivate": true,
   "entryPoints": [
-    "./src/arp.ts"
+    "./src/auto-pack.ts"
   ],
   "disableSources": true,
   "hideGenerator": true,
