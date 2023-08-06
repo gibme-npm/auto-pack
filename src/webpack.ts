@@ -100,12 +100,14 @@ interface Package {
 
     const config: Configuration = legacyConfig || defaultConfig;
 
+    config.plugins ??= [];
+
     if (!legacyConfig && pkgRequired('jquery')) {
         const jquery = pkgResolve('jquery');
 
         Logger.info('jQuery detected: %s', jquery);
 
-        config.plugins?.push(
+        config.plugins.push(
             new webpack.ProvidePlugin({
                 $: 'jquery',
                 jQuery: 'jquery',
@@ -126,6 +128,18 @@ interface Package {
         Logger.info('jQuery exposed!');
     }
 
+    { // these are plugins that we **highly** recommend
+        let last = 0;
+        config.plugins.push(new webpack.ProgressPlugin((percentage, msg, ...args) => {
+            const pct = parseInt((percentage * 100).toFixed(0));
+            if (pct !== last) {
+                Logger.info('%s% complete: %s %s', pct, msg, args.join(' '));
+                last = pct;
+            }
+        }));
+        config.plugins.push(new NodePolyfillPlugin());
+    }
+
     if (!legacyConfig) {
         config.entry = {};
 
@@ -138,17 +152,6 @@ interface Package {
 
             config.entry[entry] = resolve(cwd, entries[entry]);
         }
-
-        let last = 0;
-        config.plugins?.push(new webpack.ProgressPlugin((percentage, msg, ...args) => {
-            const pct = parseInt((percentage * 100).toFixed(0));
-            if (pct !== last) {
-                Logger.info('%s% complete: %s %s', pct, msg, args.join(' '));
-                last = pct;
-            }
-        }));
-    } else {
-        config.plugins?.push(new NodePolyfillPlugin());
     }
 
     let entries = 0;

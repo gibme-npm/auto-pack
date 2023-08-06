@@ -1,6 +1,6 @@
 {
   "name": "@gibme/auto-pack",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Webpack with a twist",
   "bin": {
     "auto-pack": "cli.js"
@@ -15,6 +15,7 @@
     "build:docs": "./node_modules/.bin/typedoc",
     "build:typescript": "./node_modules/.bin/tsc",
     "test": "yarn test:style && yarn test:mocha",
+    "test:typecheck": "./node_modules/.bin/tsc --noEmit",
     "test:style": "yarn style",
     "test:mocha": "./node_modules/.bin/mocha --exit --timeout 30000 --require ts-node/register test/test.ts",
     "style": "./node_modules/.bin/eslint src/**/*.ts test/**/*.ts",
@@ -38,29 +39,29 @@
     "email": "brandonlehmann@gmail.com"
   },
   "dependencies": {
-    "@gibme/logger": "^1.0.3",
-    "css-loader": "^6.7.3",
+    "@gibme/logger": "^1.0.4",
+    "css-loader": "^6.8.1",
     "expose-loader": "^4.1.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
-    "style-loader": "^3.3.2",
-    "ts-loader": "^9.4.2",
-    "webpack": "^5.77.0"
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.4",
+    "webpack": "^5.88.2"
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.0",
-    "@types/node": "^18.15.11",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.4.8",
     "@types/webpack": "^5.28.1",
-    "@typescript-eslint/eslint-plugin": "^5.42.0",
-    "@typescript-eslint/parser": "^5.42.0",
-    "eslint": "^8.26.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.4.0",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "eslint": "^8.46.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-n": "^16.0.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
-    "mocha": "^10.1.0",
+    "mocha": "^10.2.0",
     "ts-node": "^10.9.1",
-    "typedoc": "^0.23.28",
-    "typescript": "^5.0.3"
+    "typedoc": "^0.24.8",
+    "typescript": "^5.1.6"
   }
 }
