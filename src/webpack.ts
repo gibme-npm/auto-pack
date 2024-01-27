@@ -22,6 +22,7 @@ import webpack, { Configuration } from 'webpack';
 import { existsSync } from 'fs';
 import { resolve } from 'path';
 import Logger from '@gibme/logger';
+import { inspect } from 'util';
 
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 
@@ -50,6 +51,10 @@ interface Package {
     Logger.info('Webpack Starting in: %s', cwd);
 
     const pkg: Package = require(resolve(cwd, 'package.json'));
+
+    if (pkg.webpack) {
+        Logger.warn('Including Package.json config');
+    }
 
     const legacyConfig = existsSync(webpackConfig) ? require(webpackConfig) : undefined;
 
@@ -174,6 +179,9 @@ interface Package {
     Logger.warn('%s entry point(s) detected', entries);
 
     Logger.info('');
+
+    Logger.info('Full Configuration');
+    console.log(inspect(config, { depth: 100 }));
 
     webpack(config, (error, stats) => {
         if (error) {
