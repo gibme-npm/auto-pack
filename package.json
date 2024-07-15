@@ -1,6 +1,6 @@
 {
   "name": "@gibme/auto-pack",
-  "version": "0.1.0",
+  "version": "0.3.2",
   "description": "Webpack with a twist",
   "bin": {
     "auto-pack": "cli.js"
@@ -39,13 +39,14 @@
     "email": "brandonlehmann@gmail.com"
   },
   "dependencies": {
-    "@gibme/logger": "^1.0.4",
+    "@gibme/logger": "^1.0.10",
     "css-loader": "^6.8.1",
     "expose-loader": "^4.1.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.5.1",
-    "webpack": "^5.89.0"
+    "webpack": "^5.89.0",
+    "webpack-bundle-analyzer": "^4.10.2"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.4",

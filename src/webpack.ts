@@ -25,17 +25,80 @@ import Logger from '@gibme/logger';
 import { inspect } from 'util';
 
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
+const fallbacks = new Map<string, string>([
+    ['assert', 'assert'],
+    ['buffer', 'buffer'],
+    ['console', 'console-browserify'],
+    ['constants', 'constants-browserify'],
+    ['crypto', 'crypto-browserify'],
+    ['domain', 'domain-browser'],
+    ['events', 'events'],
+    ['http', 'stream-http'],
+    ['https', 'https-browserify'],
+    ['os', 'os-browserify/browser'],
+    ['path', 'path-browserify'],
+    ['punycode', 'punycode'],
+    ['process', 'process/browser'],
+    ['querystring', 'querystring-es3'],
+    ['stream', 'stream-browserify'],
+    ['string_decoder', 'string_decoder'],
+    ['sys', 'util'],
+    ['timers', 'timers-browserify'],
+    ['tty', 'tty-browserify'],
+    ['url', 'url'],
+    ['util', 'util'],
+    ['vm', 'vm-browserify'],
+    ['zlib', 'browserify-zlib']
+]);
+
+interface Fallbacks {
+    assert: boolean;
+    buffer: boolean;
+    console: boolean;
+    constants: boolean;
+    crypto: boolean;
+    domain: boolean;
+    events: boolean;
+    fs: boolean;
+    http: boolean;
+    https: boolean;
+    os: boolean;
+    path: boolean;
+    punycode: boolean;
+    process: boolean;
+    querystring: boolean;
+    stream: boolean;
+    string_decoder: boolean;
+    sys: boolean;
+    timers: boolean;
+    tty: boolean;
+    url: boolean;
+    util: boolean;
+    vm: boolean;
+    zlib: boolean;
+
+    [key: string]: boolean;
+}
+
+interface ExtendedConfiguration extends Configuration {
+    path: string;
+    filename: string;
+    type: string;
+    enableFallbacks: Partial<Fallbacks>;
+    enablePlugins: Partial<{
+       bundleAnalyzer: boolean;
+       polyfills: boolean;
+    }>;
+    exclude: Partial<{
+        momentLocales: boolean;
+    }>;
+    entry: {[key: string]: string;}
+}
 
 interface Package {
-    webpack?: {
-        mode?: 'production' | 'development' | 'none';
-        entry?: {
-            [key: string]: string;
-        },
-        path?: string;
-        filename?: string;
-        type?: string;
-    }
+    webpack?: Partial<ExtendedConfiguration>;
 }
 
 (async () => {
@@ -64,7 +127,7 @@ interface Package {
 
     const defaultConfig: Configuration = {
         mode: pkg.webpack?.mode || 'production',
-        devtool: 'source-map',
+        devtool: pkg.webpack?.devtool || 'source-map',
         entry: {},
         output: {
             path: resolve(cwd, pkg.webpack?.path || 'dist'),
@@ -74,19 +137,40 @@ interface Package {
             }
         },
         optimization: {
+            minimize: true,
             usedExports: true,
             sideEffects: true
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             fallback: {
+                assert: false,
+                buffer: false,
+                console: false,
+                constants: false,
+                crypto: false,
+                domain: false,
+                events: false,
                 fs: false,
-                path: false
+                http: false,
+                https: false,
+                os: false,
+                path: false,
+                punycode: false,
+                process: false,
+                querystring: false,
+                stream: false,
+                string_decoder: false,
+                sys: false,
+                timers: false,
+                tty: false,
+                url: false,
+                util: false,
+                vm: false,
+                zlib: false
             }
         },
-        plugins: [
-            new NodePolyfillPlugin()
-        ],
+        plugins: [],
         module: {
             rules: [
                 {
@@ -106,6 +190,33 @@ interface Package {
     const config: Configuration = legacyConfig || defaultConfig;
 
     config.plugins ??= [];
+
+    if (pkg.webpack?.enablePlugins?.polyfills) {
+        config.plugins.push(new NodePolyfillPlugin());
+    }
+
+    if (pkg.webpack?.enablePlugins?.bundleAnalyzer) {
+        config.plugins.push(new BundleAnalyzerPlugin());
+    }
+
+    if (pkg.webpack?.exclude?.momentLocales) {
+        config.plugins.push(new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en/));
+    }
+
+    if (pkg.webpack?.enableFallbacks) {
+        for (const key of Object.keys(pkg.webpack?.enableFallbacks)) {
+            if (!config.resolve) config.resolve = {};
+            if (!config.resolve.fallback) config.resolve.fallback = {};
+
+            const module = fallbacks.get(key);
+
+            if (module) {
+                (config.resolve.fallback as any)[key] = require.resolve(module);
+            } else {
+                (config.resolve.fallback as any)[key] = false;
+            }
+        }
+    }
 
     if (!legacyConfig && pkgRequired('jquery')) {
         const jquery = pkgResolve('jquery');
@@ -142,7 +253,6 @@ interface Package {
                 last = pct;
             }
         }));
-        config.plugins.push(new NodePolyfillPlugin());
     }
 
     if (!legacyConfig) {
