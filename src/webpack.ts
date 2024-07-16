@@ -183,12 +183,6 @@ interface Package {
                 last = pct;
             }
         }));
-
-        config.plugins.push(new webpack.ProvidePlugin({
-            Buffer: [require.resolve('buffer/'), 'Buffer'],
-            console: require.resolve('console-browserify'),
-            process: require.resolve('process/browser')
-        }));
     }
 
     if (!legacyConfig) {
