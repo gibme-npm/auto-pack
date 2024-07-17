@@ -24,9 +24,8 @@ import { resolve } from 'path';
 export interface KnownPlugins {
     bundleAnalyzer: boolean;
     polyfills: boolean;
-    environment: string[];
-    dotenv: string[];
-    dynamicCdn: boolean;
+    environment: {[key: string]: any};
+    dotenv: {[key: string]: any};
 }
 
 export interface ExcludeHooks {

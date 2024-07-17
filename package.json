@@ -1,6 +1,6 @@
 {
   "name": "@gibme/auto-pack",
-  "version": "0.4.0",
+  "version": "0.4.2",
   "description": "Webpack with a twist",
   "bin": {
     "auto-pack": "cli.js"
@@ -43,7 +43,6 @@
     "css-loader": "^6.8.1",
     "deepmerge": "^4.3.1",
     "dotenv": "^16.4.5",
-    "dynamic-cdn-webpack-plugin": "^5.0.0",
     "expose-loader": "^4.1.0",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "style-loader": "^3.3.3",

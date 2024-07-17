@@ -29,7 +29,6 @@ import { config as dotenv } from 'dotenv';
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const NodePolyfillsPlugin = require('node-polyfill-webpack-plugin');
-const DynamicCDNPlugin = require('dynamic-cdn-webpack-plugin');
 
 (async () => {
     const cwd = process.cwd();
@@ -79,16 +78,16 @@ const DynamicCDNPlugin = require('dynamic-cdn-webpack-plugin');
         config.plugins?.push(new NodePolyfillsPlugin());
     }
 
-    if (config.enablePlugins?.dynamicCdn) {
-        config.plugins?.push(new DynamicCDNPlugin());
-    }
-
     if (config.enablePlugins?.environment) {
+        const vars = Object.keys(config.enablePlugins.environment);
+        Logger.warn(`Including environment variables: ${vars.join(',')}`);
         config.plugins?.push(new webpack.EnvironmentPlugin(config.enablePlugins.environment));
     }
 
     if (config.enablePlugins?.dotenv) {
         dotenv();
+        const vars = Object.keys(config.enablePlugins.dotenv);
+        Logger.warn(`Including environment variables: ${vars.join(',')}`);
         config.plugins?.push(new webpack.EnvironmentPlugin(config.enablePlugins.dotenv));
     }
 
@@ -151,7 +150,7 @@ const DynamicCDNPlugin = require('dynamic-cdn-webpack-plugin');
     Logger.warn('%s entry point(s) detected', Object.keys(config.entry ?? {}).length);
     Logger.info('');
     Logger.info('Full Configuration');
-    Logger.debug(inspect(config, { depth: 100 }));
+    Logger.debug(`\n${inspect(config, { depth: 100 })}`);
 
     delete config.path;
     delete config.filename;
