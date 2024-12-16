@@ -101,7 +101,7 @@ const NodePolyfillsPlugin = require('node-polyfill-webpack-plugin');
         if (config.type) config.output.library = { type: config.type };
     }
 
-    if (pkg.required('jquery')) {
+    if (pkg.required('jquery') && !config.exclude?.globalJQuery) {
         const jquery = pkg.resolve('jquery');
 
         Logger.info('jQuery detected: %s', jquery);

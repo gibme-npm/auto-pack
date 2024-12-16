@@ -30,6 +30,7 @@ export interface KnownPlugins {
 
 export interface ExcludeHooks {
     momentLocales: boolean;
+    globalJQuery: boolean;
 }
 
 export interface Configuration extends WebpackConfiguration {
