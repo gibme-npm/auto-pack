@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('./dist/webpack');
+require('./dist/index');

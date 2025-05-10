@@ -1,6 +1,6 @@
 {
   "name": "@gibme/auto-pack",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "Webpack with a twist",
   "bin": {
     "auto-pack": "cli.js"
@@ -31,7 +31,7 @@
     "url": "https://github.com/gibme-npm/auto-pack/issues"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "engineStrict": true,
   "author": {
@@ -39,21 +39,20 @@
     "email": "brandonlehmann@gmail.com"
   },
   "dependencies": {
-    "@gibme/logger": "^1.0.10",
-    "css-loader": "^6.8.1",
+    "@gibme/logger": "^1.0.13",
+    "css-loader": "^7.1.2",
     "deepmerge": "^4.3.1",
-    "dotenv": "^16.4.5",
-    "expose-loader": "^4.1.0",
-    "node-polyfill-webpack-plugin": "^2.0.1",
-    "style-loader": "^3.3.3",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.89.0",
+    "dotenv": "^16.5.0",
+    "expose-loader": "^5.0.1",
+    "node-polyfill-webpack-plugin": "^4.1.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.2",
+    "webpack": "^5.99.8",
     "webpack-bundle-analyzer": "^4.10.2"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.4",
-    "@types/node": "^20.9.0",
-    "@types/webpack": "^5.28.5",
+    "@types/node": "^22.15.17",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "eslint": "^8.53.0",
@@ -63,8 +62,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "mocha": "^10.2.0",
-    "ts-node": "^10.9.1",
-    "typedoc": "^0.25.3",
-    "typescript": "^5.2.2"
+    "ts-node": "^10.9.2",
+    "typedoc": "^0.28.4",
+    "typescript": "^5.8.3"
   }
 }
