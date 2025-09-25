@@ -1,6 +1,6 @@
 {
   "name": "@gibme/auto-pack",
-  "version": "20.0.0",
+  "version": "20.0.1",
   "description": "Webpack with a twist",
   "bin": {
     "auto-pack": "cli.js"
