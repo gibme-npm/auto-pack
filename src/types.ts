@@ -78,14 +78,14 @@ export const defaultConfig: Partial<Configuration> = {
             process: require.resolve('process/browser'),
             querystring: require.resolve('querystring-es3'),
             stream: require.resolve('stream-browserify'),
-            /* eslint-disable camelcase */
+
             _stream_duplex: require.resolve('readable-stream/lib/_stream_duplex'),
             _stream_passthrough: require.resolve('readable-stream/lib/_stream_passthrough'),
             _stream_readable: require.resolve('readable-stream/lib/_stream_readable'),
             _stream_transform: require.resolve('readable-stream/lib/_stream_transform'),
             _stream_writable: require.resolve('readable-stream/lib/_stream_writable'),
             string_decoder: require.resolve('string_decoder/'),
-            /* eslint-enable camelcase */
+
             sys: require.resolve('util/'),
             timers: require.resolve('timers-browserify'),
             tty: require.resolve('tty-browserify'),

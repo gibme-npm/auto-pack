@@ -36,6 +36,7 @@ export default abstract class pkg {
         const path = resolve(process.cwd(), 'webpack.config.js');
 
         if (existsSync(path)) {
+            // eslint-disable-next-line @typescript-eslint/no-require-imports
             return require(path);
         }
     }
@@ -44,11 +45,13 @@ export default abstract class pkg {
         const path = resolve(process.cwd(), 'webpack.config.ts');
 
         if (existsSync(path)) {
+            // eslint-disable-next-line @typescript-eslint/no-require-imports
             return require(path).default;
         }
     }
 
     public static package_config (): Partial<Configuration> | undefined {
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         const config: PackageConfig = require(resolve(process.cwd(), 'package.json'));
 
         return config.webpack;

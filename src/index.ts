@@ -27,7 +27,9 @@ import pkg from './pkg';
 import deepmerge from 'deepmerge';
 import { config as dotenv } from 'dotenv';
 
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const NodePolyfillsPlugin = require('node-polyfill-webpack-plugin');
 
 (async () => {
