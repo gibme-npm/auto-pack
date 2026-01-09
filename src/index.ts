@@ -87,7 +87,7 @@ const NodePolyfillsPlugin = require('node-polyfill-webpack-plugin');
     }
 
     if (config.enablePlugins?.dotenv) {
-        dotenv();
+        dotenv({ quiet: true });
         const vars = Object.keys(config.enablePlugins.dotenv);
         Logger.warn(`Including environment variables: ${vars.join(',')}`);
         config.plugins?.push(new webpack.EnvironmentPlugin(config.enablePlugins.dotenv));
