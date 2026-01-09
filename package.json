@@ -1,6 +1,6 @@
 {
   "name": "@gibme/auto-pack",
-  "version": "20.0.3",
+  "version": "20.0.4",
   "description": "Webpack with a twist",
   "bin": {
     "auto-pack": "cli.js"
@@ -46,9 +46,9 @@
     "expose-loader": "^5.0.1",
     "node-polyfill-webpack-plugin": "^4.1.0",
     "style-loader": "^4.0.0",
-    "ts-loader": "^9.5.2",
-    "webpack": "^5.103.0",
-    "webpack-bundle-analyzer": "^5.0.1"
+    "ts-loader": "^9.5.4",
+    "webpack": "^5.104.1",
+    "webpack-bundle-analyzer": "^5.1.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
@@ -63,7 +63,7 @@
     "eslint-plugin-n": "^17.23.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^7.2.1",
-    "globals": "^16.5.0",
+    "globals": "^17.0.0",
     "mocha": "^11.7.5",
     "ts-node": "^10.9.2",
     "typedoc": "^0.28.15",
