@@ -39,7 +39,7 @@
     "email": "brandonlehmann@gmail.com"
   },
   "dependencies": {
-    "@gibme/logger": "^22.0.0",
+    "@gibme/logger": "^22.0.1",
     "css-loader": "^7.1.4",
     "deepmerge": "^4.3.1",
     "dotenv": "^17.4.0",
