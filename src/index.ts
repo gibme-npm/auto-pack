@@ -24,7 +24,7 @@ import Logger from '@gibme/logger';
 import { Configuration } from './types';
 import { inspect } from 'util';
 import pkg from './pkg';
-import deepmerge from 'deepmerge';
+import { deepmerge } from 'deepmerge-ts';
 import { config as dotenv } from 'dotenv';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -51,19 +51,19 @@ const NodePolyfillsPlugin = require('node-polyfill-webpack-plugin');
         if (legacy_config) {
             Logger.warn('Merging configuration from webpack.config.js');
 
-            temp = deepmerge(temp, legacy_config as Configuration);
+            temp = deepmerge(temp, legacy_config as Configuration) as Configuration;
         }
 
         if (legacy_config_typescript) {
             Logger.warn('Merging configuration from webpack.config.ts');
 
-            temp = deepmerge(temp, legacy_config_typescript as Configuration);
+            temp = deepmerge(temp, legacy_config_typescript as Configuration) as Configuration;
         }
 
         if (package_config) {
             Logger.warn('Merging configuration from package.json');
 
-            temp = deepmerge(temp, package_config);
+            temp = deepmerge(temp, package_config) as Configuration;
         }
 
         temp.enablePlugins ??= {};

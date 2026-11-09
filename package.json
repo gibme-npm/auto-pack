@@ -1,6 +1,6 @@
 {
   "name": "@gibme/auto-pack",
-  "version": "22.0.2",
+  "version": "22.0.3",
   "description": "Webpack with a twist",
   "bin": {
     "auto-pack": "cli.js"
@@ -41,7 +41,7 @@
   "dependencies": {
     "@gibme/logger": "^22.0.1",
     "css-loader": "^7.1.4",
-    "deepmerge": "^4.3.1",
+    "deepmerge-ts": "^8.0.2",
     "dotenv": "^17.4.0",
     "expose-loader": "^5.0.1",
     "node-polyfill-webpack-plugin": "^4.1.0",
